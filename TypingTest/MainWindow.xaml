@@ -1,0 +1,238 @@
+﻿<Window x:Class="TypingTest.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Batoot! TypeTest" Height="438" Width="939">
+    <Window.Resources>
+        <ControlTemplate x:Key="EllipseButton">
+                <Border CornerRadius="14" BorderThickness="2" Background="{TemplateBinding Button.Background}" BorderBrush="Black">
+                    <TextBlock FontSize="30" VerticalAlignment="Center" FontWeight="Medium" TextAlignment="Center" Text="{TemplateBinding Button.Content}">
+                    </TextBlock>
+                </Border>
+        </ControlTemplate>
+        <Style x:Key="EllipseKeyboardKeys">
+            <Style.Setters>
+                <Setter Property="Button.Template" Value="{StaticResource EllipseButton}"/>
+                <Setter Property="Button.Margin" Value="2.5"/>
+            </Style.Setters>
+        </Style>
+        <ControlTemplate x:Key="ThinButton">
+            <Border CornerRadius="14" BorderThickness="2" Background="{TemplateBinding Button.Background}" BorderBrush="Black">
+                <TextBlock FontSize="{TemplateBinding Button.FontSize}" VerticalAlignment="Center" FontWeight="Medium" FontStyle="Italic" TextAlignment="Center" Text="{TemplateBinding Button.Content}">
+                </TextBlock>
+            </Border>
+        </ControlTemplate>
+        <Style x:Key="KeyboardKeys">
+            <Style.Setters>
+                <Setter Property="Button.Margin" Value="2.5"/>
+                <Setter Property="Button.Template" Value="{StaticResource ThinButton}"/>
+            </Style.Setters>
+        </Style>
+    </Window.Resources>
+        <Grid ShowGridLines="False">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.70*"/>
+                <RowDefinition Height="0.70*"/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions> 
+            
+            <Grid Row="0" ShowGridLines="False">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.5*"/>
+                    <RowDefinition Height="0.5*"/>
+                </Grid.RowDefinitions> 
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="0.5*"/>
+                </Grid.ColumnDefinitions> 
+                
+                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                    <TextBlock FontSize="20" Text="Speed:" Margin="10 0 10 0"/>
+                    <TextBlock x:Name="SpeedTextBlock" FontSize="20" Text="0" Margin="0 0 10 0"/>
+                    <TextBlock FontSize="20" Text="chars/s"  Margin="0 0 90 0"/>
+                </StackPanel>
+                
+                <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
+                    <TextBlock FontSize="20" Text="Fails:" Margin="10 0 10 0"/>
+                    <TextBlock x:Name="FailsTextBlock" FontSize="20" Text="0" Margin="0 0 10 0"/>
+                    <CheckBox x:Name="CapsLockCheckBox" Margin="0 8 0 0" IsEnabled="False"/> 
+                    <TextBlock FontSize="20" Text="Caps lock" Margin="3 0 10 0"/>
+                </StackPanel>
+                
+                <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal">
+                    <TextBlock FontSize="20" Text="Difficulty:" Margin="10 3 10 0"/>
+                    <TextBlock x:Name="DifficultyTextBlock" FontSize="20" Text="0" Margin="0 3 10 0"/>
+                    <Slider x:Name="DifficultySlider" ValueChanged="RangeBase_OnValueChanged" Maximum="9" Width="100" Height="22" Margin="0 4 0 0"></Slider>
+                </StackPanel>
+                
+                <StackPanel Grid.Row="0" Grid.Column="3" Orientation="Horizontal">
+                    <CheckBox x:Name="CaseSensitiveCheckBox" Height="30" IsChecked="True" Margin="10 10 10 0"/>
+                    <TextBlock FontSize="20" Text="Case sensitive" Margin="0 3 10 0"/>
+                </StackPanel>
+                
+                <Button Click="ButtonStart_OnClick" Grid.Row="1" Grid.Column="2" Content="Start" Height="21" Width="220"></Button>
+                <Button Click="ButtonStop_OnClick" Grid.Row="1" Grid.Column="3" Content="Stop" Height="21" Width="220"></Button>
+            </Grid>
+            <Grid Grid.Row="1" Background="#ADD8E6">
+                <Grid>
+                    <Label x:Name="TextLabel" Background="#ADD8E6" FontSize="48" Foreground="Gray" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="40 0 40 0">
+                        Batoot! TypeTest
+                    </Label>
+                </Grid>
+                
+            </Grid>
+            <Grid Grid.Row="2" x:Name="MainGrid">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Row="0" Grid.Column="0" Content="'" Style="{DynamicResource EllipseKeyboardKeys}" Background="#f07795"></Button>
+                    <Button Grid.Row="0" Grid.Column="1" Content="1" Style="{DynamicResource EllipseKeyboardKeys}" Background="#f07795"></Button>
+                    <Button Grid.Row="0" Grid.Column="2" Content="2" Style="{DynamicResource EllipseKeyboardKeys}" Background="#f07795"></Button>
+                    <Button Grid.Row="0" Grid.Column="3" Content="3" Style="{DynamicResource EllipseKeyboardKeys}" Background="#E6F077"></Button>
+                    <Button Grid.Row="0" Grid.Column="4" Content="4" Style="{DynamicResource EllipseKeyboardKeys}" Background="#7FF077"></Button>
+                    <Button Grid.Row="0" Grid.Column="5" Content="5" Style="{DynamicResource EllipseKeyboardKeys}" Background="#77BEF0"></Button>
+                    <Button Grid.Row="0" Grid.Column="6" Content="6" Style="{DynamicResource EllipseKeyboardKeys}" Background="#77BEF0"></Button>
+                    <Button Grid.Row="0" Grid.Column="7" Content="7" Style="{DynamicResource EllipseKeyboardKeys}" Background="#DB77F0"></Button>
+                    <Button Grid.Row="0" Grid.Column="8" Content="8" Style="{DynamicResource EllipseKeyboardKeys}" Background="#DB77F0"></Button>
+                    <Button Grid.Row="0" Grid.Column="9" Content="9" Style="{DynamicResource EllipseKeyboardKeys}" Background="#f07795"></Button>
+                    <Button Grid.Row="0" Grid.Column="10" Content="0" Style="{DynamicResource EllipseKeyboardKeys}" Background="#E6F077"></Button>
+                    <Button Grid.Row="0" Grid.Column="11" Content="-" Style="{DynamicResource EllipseKeyboardKeys}" Background="#7FF077"></Button>
+                    <Button Grid.Row="0" Grid.Column="12" Content="=" Style="{DynamicResource EllipseKeyboardKeys}" Background="#7FF077"></Button>
+                    <Button Grid.Row="0" Grid.Column="13" Content="Backspace" FontSize="20" Style="{DynamicResource KeyboardKeys}" Background="#B5B5B5"></Button>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.5*"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="1.5*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Row="0" Grid.Column="0" Content="Tab" FontSize="20" Style="{DynamicResource KeyboardKeys}" Background="#B5B5B5"></Button>
+                    <Button Grid.Row="0" Grid.Column="1" Content="q" Style="{DynamicResource EllipseKeyboardKeys}" Background="#f07795"></Button>
+                    <Button Grid.Row="0" Grid.Column="2" Content="w" Style="{DynamicResource EllipseKeyboardKeys}" Background="#E6F077"></Button>
+                    <Button Grid.Row="0" Grid.Column="3" Content="e" Style="{DynamicResource EllipseKeyboardKeys}" Background="#7FF077"></Button>
+                    <Button Grid.Row="0" Grid.Column="4" Content="r" Style="{DynamicResource EllipseKeyboardKeys}" Background="#77BEF0"></Button>
+                    <Button Grid.Row="0" Grid.Column="5" Content="t" Style="{DynamicResource EllipseKeyboardKeys}" Background="#77BEF0"></Button>
+                    <Button Grid.Row="0" Grid.Column="6" Content="y" Style="{DynamicResource EllipseKeyboardKeys}" Background="#DB77F0"></Button>
+                    <Button Grid.Row="0" Grid.Column="7" Content="u" Style="{DynamicResource EllipseKeyboardKeys}" Background="#DB77F0"></Button>
+                    <Button Grid.Row="0" Grid.Column="8" Content="i" Style="{DynamicResource EllipseKeyboardKeys}" Background="#f07795"></Button>
+                    <Button Grid.Row="0" Grid.Column="9" Content="o" Style="{DynamicResource EllipseKeyboardKeys}" Background="#E6F077"></Button>
+                    <Button Grid.Row="0" Grid.Column="10" Content="p" Style="{DynamicResource EllipseKeyboardKeys}" Background="#7FF077"></Button>
+                    <Button Grid.Row="0" Grid.Column="11" Content="[" Style="{DynamicResource EllipseKeyboardKeys}" Background="#7FF077"></Button>
+                    <Button Grid.Row="0" Grid.Column="12" Content="]" Style="{DynamicResource EllipseKeyboardKeys}" Background="#7FF077"></Button>
+                    <Button Grid.Row="0" Grid.Column="13" Content="\" FontSize="30" Style="{DynamicResource KeyboardKeys}" Background="#7FF077"></Button>
+                </Grid>
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Row="0" Grid.Column="0" Content="Caps Lock" FontSize="20" Style="{DynamicResource KeyboardKeys}" Background="#B5B5B5"></Button>
+                    <Button Grid.Row="0" Grid.Column="1" Content="a" Style="{DynamicResource EllipseKeyboardKeys}" Background="#f07795"></Button>
+                    <Button Grid.Row="0" Grid.Column="2" Content="s" Style="{DynamicResource EllipseKeyboardKeys}" Background="#E6F077"></Button>
+                    <Button Grid.Row="0" Grid.Column="3" Content="d" Style="{DynamicResource EllipseKeyboardKeys}" Background="#7FF077"></Button>
+                    <Button Grid.Row="0" Grid.Column="4" Content="f" Style="{DynamicResource EllipseKeyboardKeys}" Background="#77BEF0"></Button>
+                    <Button Grid.Row="0" Grid.Column="5" Content="g" Style="{DynamicResource EllipseKeyboardKeys}" Background="#77BEF0"></Button>
+                    <Button Grid.Row="0" Grid.Column="6" Content="h" Style="{DynamicResource EllipseKeyboardKeys}" Background="#DB77F0"></Button>
+                    <Button Grid.Row="0" Grid.Column="7" Content="j" Style="{DynamicResource EllipseKeyboardKeys}" Background="#DB77F0"></Button>
+                    <Button Grid.Row="0" Grid.Column="8" Content="k" Style="{DynamicResource EllipseKeyboardKeys}" Background="#f07795"></Button>
+                    <Button Grid.Row="0" Grid.Column="9" Content="l" Style="{DynamicResource EllipseKeyboardKeys}" Background="#E6F077"></Button>
+                    <Button Grid.Row="0" Grid.Column="10" Content=";" Style="{DynamicResource EllipseKeyboardKeys}" Background="#7FF077"></Button>
+                    <Button Grid.Row="0" Grid.Column="11" Content="'" Style="{DynamicResource EllipseKeyboardKeys}" Background="#7FF077"></Button>
+                    <Button Grid.Row="0" Grid.Column="12" Content="Enter" FontSize="20" Style="{DynamicResource KeyboardKeys}" Background="#B5B5B5"></Button>
+                </Grid>
+                <Grid Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2.5*"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="2.5*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Row="0" Grid.Column="0" Content="Shift" FontSize="20" Style="{DynamicResource KeyboardKeys}" Background="#B5B5B5"></Button>
+                    <Button Grid.Row="0" Grid.Column="1" Content="z" Style="{DynamicResource EllipseKeyboardKeys}" Background="#f07795"></Button>
+                    <Button Grid.Row="0" Grid.Column="2" Content="x" Style="{DynamicResource EllipseKeyboardKeys}" Background="#E6F077"></Button>
+                    <Button Grid.Row="0" Grid.Column="3" Content="c" Style="{DynamicResource EllipseKeyboardKeys}" Background="#7FF077"></Button>
+                    <Button Grid.Row="0" Grid.Column="4" Content="v" Style="{DynamicResource EllipseKeyboardKeys}" Background="#77BEF0"></Button>
+                    <Button Grid.Row="0" Grid.Column="5" Content="b" Style="{DynamicResource EllipseKeyboardKeys}" Background="#77BEF0"></Button>
+                    <Button Grid.Row="0" Grid.Column="6" Content="n" Style="{DynamicResource EllipseKeyboardKeys}" Background="#DB77F0"></Button>
+                    <Button Grid.Row="0" Grid.Column="7" Content="m" Style="{DynamicResource EllipseKeyboardKeys}" Background="#DB77F0"></Button>
+                    <Button Grid.Row="0" Grid.Column="8" Content="," Style="{DynamicResource EllipseKeyboardKeys}" Background="#f07795"></Button>
+                    <Button Grid.Row="0" Grid.Column="9" Content="." Style="{DynamicResource EllipseKeyboardKeys}" Background="#E6F077"></Button>
+                    <Button Grid.Row="0" Grid.Column="10" Content="/" Style="{DynamicResource EllipseKeyboardKeys}" Background="#7FF077"></Button>
+                    <Button Grid.Row="0" Grid.Column="11" Content="Shift" FontSize="20" Style="{DynamicResource KeyboardKeys}" Background="#B5B5B5"></Button>
+                </Grid>
+                <Grid Grid.Row="4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                        <Button Grid.Row="0" Grid.Column="0" Content="Ctrl" FontSize="20" Style="{DynamicResource KeyboardKeys}" Background="#B5B5B5"></Button>
+                        <Button Grid.Row="0" Grid.Column="1" Content="Win" FontSize="20" Style="{DynamicResource KeyboardKeys}" Background="#B5B5B5"></Button>
+                        <Button Grid.Row="0" Grid.Column="2" Content="Alt" FontSize="20" Style="{DynamicResource KeyboardKeys}" Background="#B5B5B5"></Button>
+                        <Button Grid.Row="0" Grid.Column="3" Content="Space" FontSize="20" Style="{DynamicResource KeyboardKeys}" Background="#E5BB72"></Button>
+                        <Button Grid.Row="0" Grid.Column="4" Content="Alt" FontSize="20" Style="{DynamicResource KeyboardKeys}" Background="#B5B5B5"></Button>
+                        <Button Grid.Row="0" Grid.Column="5" Content="Win" FontSize="20" Style="{DynamicResource KeyboardKeys}" Background="#B5B5B5"></Button>
+                        <Button Grid.Row="0" Grid.Column="6" Content="Ctrl" FontSize="20" Style="{DynamicResource KeyboardKeys}" Background="#B5B5B5"></Button>
+                    </Grid>
+            </Grid>
+        </Grid>
+</Window>
